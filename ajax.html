@@ -9,12 +9,18 @@
   <h1>jQuery AJAX Example</h1>
 
   <button id="loadData">GitHub에서 JSON 데이터 로드</button>
+
   <table border="1" id="result">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Phone</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 데이터가 여기에 삽입될 예정 -->
+    </tbody>
   </table>
 
   <script>
@@ -27,9 +33,13 @@
           success: function (data) {
             let rows = '';
             data.forEach(function (member) {
-              rows += `<tr><td>${member.id}</td><td>${member.phone}</td></tr>`;
+              rows += `<tr>
+                          <td>${member.id}</td>
+                          <td>${member.name}</td>
+                          <td>${member.phone}</td>
+                       </tr>`;
             });
-            $('#result').append(rows);
+            $('#result tbody').html(rows); // tbody 안에만 삽입!
           },
           error: function () {
             alert('데이터를 불러오는 데 실패했습니다.');
